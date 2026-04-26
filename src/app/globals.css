@@ -10,6 +10,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-didot: "Didot", "Didot LT STD", "Bodoni 72", var(--font-didot-google), serif;
 }
 
 @media (prefers-color-scheme: dark) {
