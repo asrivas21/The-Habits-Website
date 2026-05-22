@@ -30,7 +30,7 @@ export default function HairCarePage() {
       <Header />
       <main className="bg-white">
         <section className="px-6 pt-16 pb-10 text-center">
-          <h2 className="font-didot text-4xl text-neutral-800 sm:text-5xl">
+          <h2 className="font-didot text-display text-ink">
             Hair Care Habits
           </h2>
         </section>
@@ -40,7 +40,7 @@ export default function HairCarePage() {
               <a
                 key={product.slug}
                 href={`/shop/hair-care/${product.slug}`}
-                className="group flex flex-col border border-neutral-200 bg-white transition hover:border-neutral-400"
+                className="group flex flex-col border border-rule bg-white transition hover:border-ink/40"
               >
                 <div className="relative flex aspect-square w-full items-center justify-center bg-white">
                   {product.image ? (
@@ -52,13 +52,13 @@ export default function HairCarePage() {
                       className="object-contain p-10 transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
-                    <span className="font-didot text-base text-neutral-400">
+                    <span className="font-didot text-base text-ink-soft">
                       Coming soon
                     </span>
                   )}
                 </div>
-                <div className="border-t border-neutral-200 px-6 py-5 text-center">
-                  <h3 className="font-didot text-xl text-neutral-800 sm:text-2xl">
+                <div className="border-t border-rule px-6 py-5 text-center">
+                  <h3 className="font-didot text-xl text-ink sm:text-2xl">
                     {product.name}
                   </h3>
                 </div>

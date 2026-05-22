@@ -10,7 +10,7 @@ export default function CartButton() {
     <Link
       href="/cart"
       aria-label={`Shopping cart (${itemCount} items)`}
-      className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-transparent text-white transition hover:bg-white/10"
+      className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/40 bg-transparent text-white transition hover:bg-white/10"
     >
       <svg
         width="20"
@@ -29,7 +29,7 @@ export default function CartButton() {
         <path d="M6 6L4 2H2" />
       </svg>
       {itemCount > 0 && (
-        <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-white px-1 text-[11px] font-medium leading-none text-[#f27e00]">
+        <span className="absolute -right-1 -top-1 inline-flex h-5 min-w-[20px] items-center justify-center rounded-full bg-white px-1 text-[11px] font-medium leading-none text-accent">
           {itemCount}
         </span>
       )}

@@ -43,7 +43,7 @@ export default function SearchButton() {
         aria-label="Search"
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-transparent text-white transition hover:bg-white/10"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/40 bg-transparent text-white transition hover:bg-white/10"
       >
         <svg
           width="20"
@@ -65,13 +65,13 @@ export default function SearchButton() {
           ref={panelRef}
           role="dialog"
           aria-label="Search the catalog"
-          className="fixed inset-x-0 top-[129px] z-40 max-h-[calc(100svh-129px)] overflow-y-auto border-b border-neutral-200 bg-white shadow-lg"
+          className="fixed inset-x-0 top-[129px] z-40 max-h-[calc(100svh-129px)] overflow-y-auto border-b border-rule bg-white shadow-lg"
         >
           <div className="mx-auto max-w-6xl px-6 py-6">
             <label className="sr-only" htmlFor="search-input">
               Search products and categories
             </label>
-            <div className="flex items-center gap-3 border-b border-neutral-300 pb-3">
+            <div className="flex items-center gap-3 border-b border-rule pb-3">
               <svg
                 width="20"
                 height="20"
@@ -82,7 +82,7 @@ export default function SearchButton() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                className="text-neutral-500"
+                className="text-ink-soft"
               >
                 <circle cx="11" cy="11" r="7" />
                 <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -94,24 +94,24 @@ export default function SearchButton() {
                 placeholder="Search by category or product name..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="w-full bg-transparent font-didot text-lg text-neutral-800 placeholder:text-neutral-400 focus:outline-none sm:text-xl"
+                className="w-full bg-transparent text-base text-ink placeholder:text-ink-soft focus:outline-none sm:text-lg"
               />
               <button
                 type="button"
                 onClick={close}
                 aria-label="Close search"
-                className="text-xs uppercase tracking-[0.2em] text-neutral-500 transition hover:text-neutral-800"
+                className="text-xs uppercase tracking-[0.2em] text-ink-soft transition hover:text-ink"
               >
                 Close
               </button>
             </div>
             <div className="mt-6 grid gap-8 sm:grid-cols-[1fr_2fr]">
               <section>
-                <h3 className="font-didot text-xs uppercase tracking-[0.2em] text-neutral-500">
+                <h3 className="font-didot text-xs uppercase tracking-[0.2em] text-ink-soft">
                   Categories
                 </h3>
                 {results.categories.length === 0 ? (
-                  <p className="mt-3 text-sm text-neutral-500">No matching categories.</p>
+                  <p className="mt-3 text-sm text-ink-soft">No matching categories.</p>
                 ) : (
                   <ul className="mt-3 flex flex-col gap-2">
                     {results.categories.map((c) => (
@@ -119,7 +119,7 @@ export default function SearchButton() {
                         <Link
                           href={c.href}
                           onClick={close}
-                          className="font-didot text-base text-neutral-800 transition hover:text-[#f27e00]"
+                          className="font-didot text-base text-ink transition hover:text-accent"
                         >
                           {c.label}
                         </Link>
@@ -129,21 +129,21 @@ export default function SearchButton() {
                 )}
               </section>
               <section>
-                <h3 className="font-didot text-xs uppercase tracking-[0.2em] text-neutral-500">
+                <h3 className="font-didot text-xs uppercase tracking-[0.2em] text-ink-soft">
                   Products
                 </h3>
                 {results.products.length === 0 ? (
-                  <p className="mt-3 text-sm text-neutral-500">No matching products.</p>
+                  <p className="mt-3 text-sm text-ink-soft">No matching products.</p>
                 ) : (
-                  <ul className="mt-3 flex flex-col divide-y divide-neutral-100">
+                  <ul className="mt-3 flex flex-col divide-y divide-rule">
                     {results.products.map((p) => (
                       <li key={p.id}>
                         <Link
                           href={p.href}
                           onClick={close}
-                          className="grid grid-cols-[56px_1fr_auto] items-center gap-4 py-3 transition hover:bg-neutral-50"
+                          className="grid grid-cols-[56px_1fr_auto] items-center gap-4 py-3 transition hover:bg-bone"
                         >
-                          <div className="relative aspect-square w-14 bg-[#f5f5f3]">
+                          <div className="relative aspect-square w-14 bg-bone">
                             {p.image && (
                               <Image
                                 src={p.image}
@@ -155,12 +155,12 @@ export default function SearchButton() {
                             )}
                           </div>
                           <div className="flex flex-col">
-                            <span className="font-didot text-base text-neutral-800">{p.name}</span>
-                            <span className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+                            <span className="font-didot text-base text-ink">{p.name}</span>
+                            <span className="text-xs uppercase tracking-[0.2em] text-ink-soft">
                               {p.categoryLabel} &middot; {p.size}
                             </span>
                           </div>
-                          <span className="font-didot text-sm text-neutral-700">
+                          <span className="font-didot text-sm text-ink-muted">
                             {formatPrice(p.price)}
                           </span>
                         </Link>

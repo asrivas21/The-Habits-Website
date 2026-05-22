@@ -8,7 +8,7 @@ export default function CartPage() {
       <Header />
       <main className="bg-white">
         <section className="px-6 pt-16 pb-10 text-center">
-          <h2 className="font-didot text-4xl text-neutral-800 sm:text-5xl">
+          <h2 className="font-didot text-display text-ink">
             Your Cart
           </h2>
         </section>

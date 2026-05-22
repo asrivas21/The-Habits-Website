@@ -3,94 +3,108 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-const shopLinks = [
-  { href: "/shop/hair-care", label: "Hair Care Habits" },
-  { href: "/shop/face-care", label: "Face Care Habits" },
-  { href: "/shop/immunity-energy", label: "Immunity and Energy" },
-  { href: "/shop", label: "All Products" },
+const categories = [
+  { href: "/shop/hair-care", label: "Hair Care" },
+  { href: "/shop/face-care", label: "Face Care" },
+  { href: "/shop/immunity-energy", label: "Immunity & Energy" },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  const wrapperRef = useRef<HTMLLIElement | null>(null);
+  const [hoverIdx, setHoverIdx] = useState<number | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (!open) return;
-    const onClick = (e: MouseEvent) => {
-      if (!wrapperRef.current?.contains(e.target as Node)) setOpen(false);
-    };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
-    document.addEventListener("mousedown", onClick);
     document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
     return () => {
-      document.removeEventListener("mousedown", onClick);
       document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
     };
   }, [open]);
 
+  const close = () => {
+    setOpen(false);
+    setHoverIdx(null);
+    triggerRef.current?.focus();
+  };
+
   return (
-    <nav aria-label="Primary" className="ml-[-5rem]">
-      <ul className="flex items-center gap-20 text-xl font-medium text-white font-didot">
-        <li>
-          <Link
-            href="/"
-            className="transition-colors hover:text-neutral-800" 
-          >
-            Home
-          </Link>
-        </li>
-        <li
-          className="relative"
-          ref={wrapperRef}
-          onMouseEnter={() => setOpen(true)}
-          onMouseLeave={() => setOpen(false)}
-        >
-          <button
-            type="button"
-            aria-haspopup="menu"
-            aria-expanded={open}
-            onClick={() => setOpen((o) => !o)}
-            className="flex items-center gap-1 transition-colors hover:text-black"
-          >
-            Shop
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden
-              className={`transition-transform ${open ? "rotate-180" : ""}`}
-            >
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </button>
-          {open && (
+    <>
+      <button
+        ref={triggerRef}
+        type="button"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        aria-controls="shop-menu-overlay"
+        onClick={() => (open ? close() : setOpen(true))}
+        className="font-didot text-xl font-medium text-white transition-opacity hover:opacity-80"
+      >
+        {open ? "Close" : "Menu"}
+      </button>
+      <div
+        id="shop-menu-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Shop menu"
+        aria-hidden={!open}
+        className={`fixed inset-x-0 bottom-0 top-[8rem] z-40 bg-cream transition-opacity duration-300 ${
+          open ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      >
+        <div className="grid h-full grid-cols-1 lg:grid-cols-[3fr_2fr]">
+          <div className="flex flex-col justify-center gap-10 px-10 py-16 sm:px-16 lg:px-24">
+            <span className="font-didot text-xs uppercase tracking-[0.3em] text-ink-soft">
+              The Collection
+            </span>
             <ul
-              role="menu"
-              className="absolute left-0 top-full z-20 w-56 overflow-hidden rounded-md border border-black/10 bg-white py-1 shadow-lg"
+              className="flex flex-col gap-3"
+              onMouseLeave={() => setHoverIdx(null)}
             >
-              {shopLinks.map((item) => (
-                <li key={item.href} role="none">
+              {categories.map((cat, i) => (
+                <li key={cat.href}>
                   <Link
-                    href={item.href}
-                    role="menuitem"
-                    onClick={() => setOpen(false)}
-                    className="block px-4 py-2 text-sm text-neutral-800 transition-colors hover:bg-neutral-50 hover:text-[#f27e00]"
+                    href={cat.href}
+                    onMouseEnter={() => setHoverIdx(i)}
+                    onClick={close}
+                    className={`block font-didot text-display-xl text-ink transition-opacity duration-300 hover:text-accent ${
+                      hoverIdx !== null && hoverIdx !== i
+                        ? "opacity-30"
+                        : "opacity-100"
+                    }`}
                   >
-                    {item.label}
+                    {cat.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          )}
-        </li>
-      </ul>
-    </nav>
+            <Link
+              href="/shop"
+              onClick={close}
+              className="inline-flex w-fit items-center gap-2 font-didot text-sm uppercase tracking-[0.25em] text-ink-muted transition-colors hover:text-accent"
+            >
+              View all products
+              <span aria-hidden>&rarr;</span>
+            </Link>
+          </div>
+          <div className="hidden border-l border-rule px-10 py-16 lg:flex lg:flex-col lg:items-center lg:justify-center lg:gap-6">
+            <div className="flex aspect-[4/5] w-full max-w-sm items-center justify-center bg-bone">
+              <span className="font-didot text-base text-ink-soft">
+                Coming soon
+              </span>
+            </div>
+            <p className="font-didot text-sm uppercase tracking-[0.25em] text-ink-soft">
+              {hoverIdx !== null
+                ? categories[hoverIdx].label
+                : "Browse the collection"}
+            </p>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

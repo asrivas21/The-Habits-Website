@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#f27e00] px-6 py-12">
+    <footer className="w-full bg-accent px-6 py-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6">
         <div className="flex items-center gap-5">
           <Image
@@ -12,7 +12,7 @@ export default function Footer() {
             height={500}
             className="h-16 w-auto"
           />
-          <span className="font-didot text-5xl tracking-tight text-white">
+          <span className="font-didot text-display-lg text-white">
             The Habits
           </span>
         </div>
@@ -21,7 +21,7 @@ export default function Footer() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="The Habits on Instagram"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/10"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:opacity-80"
         >
           <svg
             width="22"

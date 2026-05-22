@@ -29,12 +29,12 @@ export default function ProductActions({ product }: ProductActionsProps) {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="inline-flex w-fit items-center border border-neutral-300">
+      <div className="inline-flex w-fit items-center border border-rule">
         <button
           type="button"
           aria-label="Decrease quantity"
           onClick={decrement}
-          className="flex h-11 w-11 items-center justify-center text-neutral-700 transition hover:bg-neutral-50"
+          className="flex h-11 w-11 items-center justify-center text-ink-muted transition hover:bg-bone"
         >
           <svg
             width="14"
@@ -52,7 +52,7 @@ export default function ProductActions({ product }: ProductActionsProps) {
         </button>
         <span
           aria-live="polite"
-          className="flex h-11 w-12 items-center justify-center font-didot text-base text-neutral-800"
+          className="flex h-11 w-12 items-center justify-center font-didot text-base text-ink tabular-nums"
         >
           {quantity}
         </span>
@@ -60,7 +60,7 @@ export default function ProductActions({ product }: ProductActionsProps) {
           type="button"
           aria-label="Increase quantity"
           onClick={increment}
-          className="flex h-11 w-11 items-center justify-center text-neutral-700 transition hover:bg-neutral-50"
+          className="flex h-11 w-11 items-center justify-center text-ink-muted transition hover:bg-bone"
         >
           <svg
             width="14"
@@ -81,7 +81,7 @@ export default function ProductActions({ product }: ProductActionsProps) {
       <button
         type="button"
         onClick={onAddToCart}
-        className="inline-flex w-full items-center justify-center border border-neutral-300 bg-white px-6 py-3 font-didot text-sm uppercase tracking-[0.2em] text-neutral-800 transition hover:bg-neutral-900 hover:text-white sm:w-auto sm:min-w-[280px]"
+        className="inline-flex w-full items-center justify-center border border-ink bg-white px-6 py-3 font-didot text-sm uppercase tracking-[0.2em] text-ink transition hover:bg-ink hover:text-white sm:w-auto sm:min-w-[280px]"
       >
         {justAdded
           ? "Added to Cart \u2713"
